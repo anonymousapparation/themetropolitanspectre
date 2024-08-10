@@ -16,5 +16,25 @@
             <li><a href="upload.html">Upload</a></li>
         </ul>
     </nav>
+
+    <h2>Upload an Image</h2>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <br><br>
+    <img id="uploadedImage" style="display: none; max-width: 100%; height: auto;" alt="Uploaded Image" />
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageElement = document.getElementById('uploadedImage');
+                    imageElement.src = e.target.result;
+                    imageElement.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 </html>
