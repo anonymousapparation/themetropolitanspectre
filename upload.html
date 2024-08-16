@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        p {
+            text-align: center;
+            margin: 20px;
+        }
+      .image-container {
+            position: relative;
+            display: inline-block;
+        }
 
+        .overlay-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Ensure the overlay doesn't block the original image */
+            display: none; /* Hide the overlay initially */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="1.html">Specimen 1</a></li>
+            <li><a href="2.html">Specimen 2</a></li>
+            <li><a href="3.html">Specimen 3</a></li>
+            <li><a href="4.html">Specimen 4</a></li>
+            <li><a href="5.html">Specimen 5</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="upload.html">Upload Image</a></li>
+        </ul>
+    </nav>
+    <h1>Page 1</h1>
+    <p>This is Page 1.</p>
+    <h1>Upload and Overlay Image</h1>
+    <input type="file" id="imageUpload" accept="image/*">
+    <div id="imageContainer" class="image-container">
+        <!-- User-uploaded image will be displayed here -->
+        <img id="uploadedImage" alt="Uploaded Image">
+        <!-- Overlay image -->
+        <img id="overlayImage" class="overlay-image" src="https://static.vecteezy.com/system/resources/previews/026/979/903/non_2x/watercolor-realictic-victorian-ghost-vintage-style-illustration-gothic-shadow-clipart-isolated-on-white-background-png.png" alt="Overlay Image">
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const uploadedImage = document.getElementById('uploadedImage');
+        const overlayImage = document.getElementById('overlayImage');
+        const imageContainer = document.getElementById('imageContainer');
+
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = 'block';
+
+                    // Wait until the image is loaded before displaying the overlay
+                    uploadedImage.onload = function() {
+                        overlayImage.style.display = 'block';
+                        imageContainer.style.width = uploadedImage.width + 'px';
+                        imageContainer.style.height = uploadedImage.height + 'px';
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
