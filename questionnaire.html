@@ -111,12 +111,14 @@
         <div class="question">
             <label>Have you consumed SKYRIZI® in the last 24 hours?</label>
             <a href="https://www.skyrizi.com/" target="_blank">More Information</a>
+            <label></label>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
         </div>
         <div class="question">
             <label>Have you consumed SERESTOS® in the last 24 hours?</label>
             <a href="https://www.serestostores.com/" target="_blank">More Information</a>
+            <label></label>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
         </div>
@@ -181,11 +183,11 @@
         </div>
         <div class="question">
             <label>Yes, I want to receive hourly Zoom meeting invites</label>
-            <button type="button" id="yes-button" class="yes-no-button" selected>Yes</button>
+            <button type="button" id="yes-button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
             <button type="button" id="no-button" class="yes-no-button disabled" onclick="toggleSelected2(this)">No</button>
         </div>
         <div class="question">
-            <label>I certify that I have carefully read all of the information above and answered truthfully</label>
+            <label>I certify that I have carefully read all of the above information and that my answers are truthful</label>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
         </div>
@@ -205,7 +207,7 @@
 
     <script>
         function toggleSelected2(button) {
-            alert("Unexpected action taken");
+            alert("Unexpected action taken. Please answer the simple questionnaire properly");
         }
     </script>
 </body>
