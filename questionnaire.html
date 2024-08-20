@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .yes-no-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .yes-no-button.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Questionnaire</h1>
+
+    <!-- Section 1: Text Boxes -->
+    <div class="section">
+        <h2>Section 1: Your Thoughts</h2>
+        <div class="question">
+            <label for="question1-1">What is your favorite color?</label>
+            <input type="text" id="question1-1" name="question1-1" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question1-2">Describe your ideal vacation.</label>
+            <input type="text" id="question1-2" name="question1-2" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question1-3">What is your hobby?</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+    </div>
+
+    <!-- Section 2: Yes/No Buttons -->
+    <div class="section">
+        <h2>Section 2: Yes or No</h2>
+        <div class="question">
+            <label>Do you like ice cream?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Have you traveled abroad?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Do you enjoy reading books?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(
