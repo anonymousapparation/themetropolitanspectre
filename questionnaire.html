@@ -51,6 +51,7 @@
     </style>
 </head>
 <body>
+    <form action="submitted.html">
     <h1>Questionnaire</h1>
 
     <!-- Section 1: Text Boxes -->
@@ -188,7 +189,11 @@
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
             <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
         </div>
+        <div class="section">
+            <input type="submit" value="Submit">
+        </div>
     </div>
+    </form>
 
     <script>
         function toggleSelected(button) {
