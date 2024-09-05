@@ -267,7 +267,9 @@
         let textInputs = document.querySelectorAll('input[type="text"]');
         textInputs.forEach(input => {
             if (input.value.trim() === "") {
-                messages.push("Please fill out the text field: " + input.placeholder);
+                // Find the corresponding label text
+                let label = input.previousElementSibling.innerText;
+                messages.push("Please fill out the field: " + label);
                 valid = false;
             }
         });
@@ -296,6 +298,8 @@
         if (!valid) {
             alert(messages.join("\n"));
         }
+            
+        window.location.href = 'submitted.html';
         
         return valid;  // Only submit form if valid
     }
