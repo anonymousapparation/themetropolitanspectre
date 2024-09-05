@@ -281,8 +281,8 @@
             }
         });
 
-        // Check yes/no button selections
-        let yesNoQuestions = document.querySelectorAll('.question');
+        // Check yes/no button selections (only for questions with yes/no buttons)
+        let yesNoQuestions = document.querySelectorAll('.question:has(.yes-no-button)');
         yesNoQuestions.forEach(question => {
             let selected = question.querySelector('.yes-no-button.selected');
             if (!selected) {
