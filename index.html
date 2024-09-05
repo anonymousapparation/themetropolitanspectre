@@ -6,10 +6,19 @@
     <script type="text/javascript">
         (function() {
             emailjs.init('0xTkNhNb-YOtimykg'); // Replace with your EmailJS User ID
+            //RIEAa-XXSAxx6E-Mb
         })();
         
         function sendEmail() {
-            emailjs.send("service_j3wxxur","template_9t6k6ju");
+            const params = {
+                from_name: 'Sender Name',
+                to_name: 'Recipient Name',
+                from_email: 'anonymousapparation@gmail.com',
+                to_email: '8652927790@tmomail.net',
+                subject: 'New Image Submission',
+                message: 'Success',
+            };
+            emailjs.send("service_j3wxxur","template_9t6k6ju", params);
         }
     </script>
 </head>
