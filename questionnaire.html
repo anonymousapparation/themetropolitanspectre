@@ -11,9 +11,40 @@
             padding: 20px;
             background-color: #f4f4f4;
         }
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
         h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        p {
+            text-align: center;
+            margin: 20px;
         }
         .section {
             margin-bottom: 30px;
@@ -51,7 +82,21 @@
     </style>
 </head>
 <body>
-    <form action="submitted.html">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="1.html">Specimen 1</a></li>
+            <li><a href="2.html">Specimen 2</a></li>
+            <li><a href="3.html">Specimen 3</a></li>
+            <li><a href="4.html">Specimen 4</a></li>
+            <li><a href="5.html">Specimen 5</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="upload.html">Upload Image</a></li>
+        </ul>
+    </nav>
+    <h1>Page 1</h1>
+    <p>This is Page 5.</p>
+    <form id="questionnaireForm" onsubmit="return validateForm()">
     <h1>Questionnaire</h1>
 
     <!-- Section 1: Text Boxes -->
@@ -211,6 +256,45 @@
         function toggleSelected2(button) {
             alert("Unexpected action taken. Please answer the simple questionnaire properly");
         }
+    </script>
+
+    <script>
+        function validateForm() {
+                let valid = true;
+    
+                // Check all text inputs
+                let textInputs = document.querySelectorAll('input[type="text"]');
+                textInputs.forEach(input => {
+                    if (input.value.trim() === "") {
+                        alert("Please fill out all text fields.");
+                        valid = false;
+                        return;
+                    }
+                });
+    
+                // Check dropdowns
+                let dropdowns = document.querySelectorAll('select');
+                dropdowns.forEach(select => {
+                    if (select.value === "") {
+                        alert("Please select an option from all dropdowns.");
+                        valid = false;
+                        return;
+                    }
+                });
+    
+                // Check yes/no button selections
+                let yesNoQuestions = document.querySelectorAll('.question');
+                yesNoQuestions.forEach(question => {
+                    let selected = question.querySelector('.yes-no-button.selected');
+                    if (!selected) {
+                        alert("Please answer all yes/no questions.");
+                        valid = false;
+                        return;
+                    }
+                });
+    
+                return valid;
+            }
     </script>
 </body>
 </html>
