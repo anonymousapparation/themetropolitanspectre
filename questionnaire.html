@@ -267,7 +267,6 @@
             let textInputs = document.querySelectorAll('input[type="text"]');
             textInputs.forEach(input => {
                 if (input.value.trim() === "") {
-                    // Find the corresponding label text
                     let label = input.previousElementSibling.innerText;
                     messages.push("Please fill out the field: " + label);
                     valid = false;
@@ -296,14 +295,11 @@
     
             // If there are errors, show all in one alert
             if (!valid) {
+                event.preventDefault(); // Prevent form submission
                 alert(messages.join("\n"));
-                return false;  // Prevent form submission
-            }
-            else {
-                // Prevent default form submission
-                event.preventDefault(); 
-    
-                // Redirect to submitted.html
+            } else {
+                // If valid, allow form submission or redirect
+                event.preventDefault(); // Still prevent submission, and redirect manually
                 window.location.href = 'submitted.html';
             }
         }
