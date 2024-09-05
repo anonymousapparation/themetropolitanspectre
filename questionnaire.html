@@ -298,8 +298,9 @@
         if (!valid) {
             alert(messages.join("\n"));
         }
-            
-        window.location.href = 'submitted.html';
+        else {
+            window.location.href = 'submitted.html';
+        }
         
         return valid;  // Only submit form if valid
     }
