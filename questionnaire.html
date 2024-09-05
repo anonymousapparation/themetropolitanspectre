@@ -260,41 +260,45 @@
 
     <script>
         function validateForm() {
-                let valid = true;
-    
-                // Check all text inputs
-                let textInputs = document.querySelectorAll('input[type="text"]');
-                textInputs.forEach(input => {
-                    if (input.value.trim() === "") {
-                        alert("Please fill out all text fields.");
-                        valid = false;
-                        return;
-                    }
-                });
-    
-                // Check dropdowns
-                let dropdowns = document.querySelectorAll('select');
-                dropdowns.forEach(select => {
-                    if (select.value === "") {
-                        alert("Please select an option from all dropdowns.");
-                        valid = false;
-                        return;
-                    }
-                });
-    
-                // Check yes/no button selections
-                let yesNoQuestions = document.querySelectorAll('.question');
-                yesNoQuestions.forEach(question => {
-                    let selected = question.querySelector('.yes-no-button.selected');
-                    if (!selected) {
-                        alert("Please answer all yes/no questions.");
-                        valid = false;
-                        return;
-                    }
-                });
-    
-                return valid;
+        let valid = true;
+        let messages = [];
+        
+        // Check all text inputs
+        let textInputs = document.querySelectorAll('input[type="text"]');
+        textInputs.forEach(input => {
+            if (input.value.trim() === "") {
+                messages.push("Please fill out the text field: " + input.placeholder);
+                valid = false;
             }
+        });
+
+        // Check dropdowns
+        let dropdowns = document.querySelectorAll('select');
+        dropdowns.forEach(select => {
+            if (select.value === "") {
+                messages.push("Please select an option for: " + select.previousElementSibling.innerText);
+                valid = false;
+            }
+        });
+
+        // Check yes/no button selections
+        let yesNoQuestions = document.querySelectorAll('.question');
+        yesNoQuestions.forEach(question => {
+            let selected = question.querySelector('.yes-no-button.selected');
+            if (!selected) {
+                let questionLabel = question.querySelector('label').innerText;
+                messages.push("Please answer the yes/no question: " + questionLabel);
+                valid = false;
+            }
+        });
+
+        // If there are errors, show all in one alert
+        if (!valid) {
+            alert(messages.join("\n"));
+        }
+        
+        return valid;  // Only submit form if valid
+    }
     </script>
 </body>
 </html>
