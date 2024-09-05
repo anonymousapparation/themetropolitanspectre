@@ -96,7 +96,7 @@
     </nav>
     <h1>Page 1</h1>
     <p>This is Page 5.</p>
-    <form id="questionnaireForm" onsubmit="return validateForm()">
+    <form id="questionnaireForm" onsubmit="validateForm(event)">
     <h1>Questionnaire</h1>
 
     <!-- Section 1: Text Boxes -->
@@ -259,51 +259,54 @@
     </script>
 
     <script>
-        function validateForm() {
-        let valid = true;
-        let messages = [];
-        
-        // Check all text inputs
-        let textInputs = document.querySelectorAll('input[type="text"]');
-        textInputs.forEach(input => {
-            if (input.value.trim() === "") {
-                // Find the corresponding label text
-                let label = input.previousElementSibling.innerText;
-                messages.push("Please fill out the field: " + label);
-                valid = false;
+        function validateForm(event) {
+            let valid = true;
+            let messages = [];
+            
+            // Check all text inputs
+            let textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    // Find the corresponding label text
+                    let label = input.previousElementSibling.innerText;
+                    messages.push("Please fill out the field: " + label);
+                    valid = false;
+                }
+            });
+    
+            // Check dropdowns
+            let dropdowns = document.querySelectorAll('select');
+            dropdowns.forEach(select => {
+                if (select.value === "") {
+                    messages.push("Please select an option for: " + select.previousElementSibling.innerText);
+                    valid = false;
+                }
+            });
+    
+            // Check yes/no button selections (only for questions with yes/no buttons)
+            let yesNoQuestions = document.querySelectorAll('.question:has(.yes-no-button)');
+            yesNoQuestions.forEach(question => {
+                let selected = question.querySelector('.yes-no-button.selected');
+                if (!selected) {
+                    let questionLabel = question.querySelector('label').innerText;
+                    messages.push("Please answer the yes/no question: " + questionLabel);
+                    valid = false;
+                }
+            });
+    
+            // If there are errors, show all in one alert
+            if (!valid) {
+                alert(messages.join("\n"));
+                return false;  // Prevent form submission
             }
-        });
-
-        // Check dropdowns
-        let dropdowns = document.querySelectorAll('select');
-        dropdowns.forEach(select => {
-            if (select.value === "") {
-                messages.push("Please select an option for: " + select.previousElementSibling.innerText);
-                valid = false;
+            else {
+                // Prevent default form submission
+                event.preventDefault(); 
+    
+                // Redirect to submitted.html
+                window.location.href = 'submitted.html';
             }
-        });
-
-        // Check yes/no button selections (only for questions with yes/no buttons)
-        let yesNoQuestions = document.querySelectorAll('.question:has(.yes-no-button)');
-        yesNoQuestions.forEach(question => {
-            let selected = question.querySelector('.yes-no-button.selected');
-            if (!selected) {
-                let questionLabel = question.querySelector('label').innerText;
-                messages.push("Please answer the yes/no question: " + questionLabel);
-                valid = false;
-            }
-        });
-
-        // If there are errors, show all in one alert
-        if (!valid) {
-            alert(messages.join("\n"));
         }
-        else {
-            window.location.href = 'submitted.html';
-        }
-        
-        return valid;  // Only submit form if valid
-    }
     </script>
 </body>
 </html>
