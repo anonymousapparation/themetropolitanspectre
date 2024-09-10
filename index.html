@@ -10,15 +10,7 @@
         })();
         
         function sendEmail() {
-            const params = {
-                from_name: 'Sender Name',
-                to_name: 'Recipient Name',
-                from_email: 'anonymousapparation@gmail.com',
-                to_email: '8652927790@tmomail.net',
-                subject: 'New Image Submission',
-                message: 'Success',
-            };
-            emailjs.send("service_j3wxxur", params); //template_9t6k6ju
+            emailjs.send("service_j3wxxur", "template_9t6k6ju");
         }
     </script>
 </head>
