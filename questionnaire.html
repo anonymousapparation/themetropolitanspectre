@@ -300,6 +300,10 @@
             } else {
                 // If valid, allow form submission or redirect
                 event.preventDefault(); // Still prevent submission, and redirect manually
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+                emailjs.init('0xTkNhNb-YOtimykg'); // Replace with your EmailJS User ID
+                //RIEAa-XXSAxx6E-Mb
+                emailjs.send("service_j3wxxur", "template_9t6k6ju");
                 window.location.href = 'submitted.html';
             }
         }
