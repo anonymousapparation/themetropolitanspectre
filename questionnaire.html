@@ -8,7 +8,7 @@
         html, body {
             margin: 0;
             padding: 0;
-            width: 50%;
+            width: 40%;
         }
         
         nav {
@@ -25,20 +25,22 @@
             padding: 0;
             display: flex;
             justify-content: center; /* Center the items horizontally */
+            flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
         }
         
         nav ul li {
-            margin: 0 10px; /* Space between items */
+            margin: 0 5px; /* Reduce space between items */
         }
         
         nav ul li a {
             text-decoration: none;
             color: white;
             background-color: #007bff;
-            padding: 10px 20px;
+            padding: 8px 15px; /* Adjust padding for smaller buttons */
             border-radius: 5px;
             display: inline-block;
             font-weight: bold;
+            font-size: 14px; /* Adjust font size for smaller text */
         }
         
         nav ul li a:hover {
