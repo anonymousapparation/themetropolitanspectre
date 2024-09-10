@@ -5,30 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Hire Questionnaire</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        html, body {
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            padding: 0;
+            width: 100%;
         }
+        
         nav {
             background-color: #333;
             padding: 10px 0;
             text-align: center;
-            max-width: 100%;
+            width: 100%; /* Ensure nav spans full width */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
+        
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            max-width: 100%;
+            justify-content: center; /* Center the items horizontally */
         }
+        
         nav ul li {
-            margin: 0 10px;
-            max-width: 100%;
+            margin: 0 10px; /* Space between items */
         }
+        
         nav ul li a {
             text-decoration: none;
             color: white;
@@ -37,23 +39,27 @@
             border-radius: 5px;
             display: inline-block;
             font-weight: bold;
-            max-width: 100%;
         }
+        
         nav ul li a:hover {
             background-color: #0056b3;
-            max-width: 100%;
         }
         .header-container {
             text-align: center;
             margin: 20px auto;
-            max-width: 80%; /* Adjust as needed */
+            max-width: 90%; /* Adjust as needed */
+        }
+        .header-container h1 {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
         }
         .header-container h3 {
             margin: 20px 0; /* Adjust as needed */
             /* Optional: Add padding if needed */
             padding: 0 10px;
         }
-        .header-container h3 {
+        .header-container p {
             margin: 20px 0; /* Adjust as needed */
             /* Optional: Add padding if needed */
             padding: 0 10px;
@@ -227,7 +233,7 @@
         <h1>The Lurker in the Dark #109</h1>
         <h3>Danger Scale: 4/5</h3>
         <img src="https://anonymousapparation.github.io/themetropolitanspectre/images/unnamed.png">
-        <h3>Many businessmen have noticed strange activity in the parking garage of the Industrial District. Some have reported sightings of a hideous entity which dwells only in dark corners. These witnesses have noticed the ghoul’s intense aversion to any sources of light, preferring the deepest levels of the garage, where few frequent. Historian Jacques Rosencrantz suspects that this creature may be a member of the Rockhold catastrophe victims. In 1878, workers building a system of underground waterworks became stranded below when a cement truck crashed and sealed the entrance. With no light in their new home, it is rumored that they evolved, becoming both blind and monstrous.</h3>
+        <p>Many businessmen have noticed strange activity in the parking garage of the Industrial District. Some have reported sightings of a hideous entity which dwells only in dark corners. These witnesses have noticed the ghoul’s intense aversion to any sources of light, preferring the deepest levels of the garage, where few frequent. Historian Jacques Rosencrantz suspects that this creature may be a member of the Rockhold catastrophe victims. In 1878, workers building a system of underground waterworks became stranded below when a cement truck crashed and sealed the entrance. With no light in their new home, it is rumored that they evolved, becoming both blind and monstrous.</p>
     </div>
     
     <h1>Upload and Overlay Image</h1>
