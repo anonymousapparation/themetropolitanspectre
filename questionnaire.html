@@ -80,6 +80,70 @@
             background-color: white;
         }
     </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init('0xTkNhNb-YOtimykg'); // Replace with your EmailJS User ID
+
+        function toggleSelected(button) {
+            let buttons = button.parentElement.querySelectorAll('.yes-no-button');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+        }
+
+        function toggleSelected2(button) {
+            alert("Unexpected action taken. Please answer the simple questionnaire properly");
+        }
+
+        function validateForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            let valid = true;
+            let messages = [];
+
+            // Check all text inputs
+            let textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    let label = input.previousElementSibling.innerText;
+                    messages.push("Please fill out the field: " + label);
+                    valid = false;
+                }
+            });
+
+            // Check dropdowns
+            let dropdowns = document.querySelectorAll('select');
+            dropdowns.forEach(select => {
+                if (select.value === "") {
+                    messages.push("Please select an option for: " + select.previousElementSibling.innerText);
+                    valid = false;
+                }
+            });
+
+            // Check yes/no button selections (only for questions with yes/no buttons)
+            let yesNoQuestions = document.querySelectorAll('.question');
+            yesNoQuestions.forEach(question => {
+                let selected = question.querySelector('.yes-no-button.selected');
+                if (question.querySelector('.yes-no-button') && !selected) {
+                    let questionLabel = question.querySelector('label').innerText;
+                    messages.push("Please answer the yes/no question: " + questionLabel);
+                    valid = false;
+                }
+            });
+
+            // If there are errors, show all in one alert
+            if (!valid) {
+                alert(messages.join("\n"));
+            } else {
+                // If valid, send the email and redirect
+                emailjs.send("service_j3wxxur", "template_9t6k6ju").then(function(response) {
+                    console.log('Sent successfully', response);
+                    window.location.href = 'submitted.html';
+                }, function(error) {
+                    console.error('Failed to send', error);
+                });
+            }
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -243,70 +307,5 @@
         </div>
     </div>
     </form>
-
-    <script>
-        function toggleSelected(button) {
-            let buttons = button.parentElement.querySelectorAll('.yes-no-button');
-            buttons.forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-        }
-    </script>
-
-    <script>
-        function toggleSelected2(button) {
-            alert("Unexpected action taken. Please answer the simple questionnaire properly");
-        }
-    </script>
-
-    <script>
-        function validateForm(event) {
-            let valid = true;
-            let messages = [];
-            
-            // Check all text inputs
-            let textInputs = document.querySelectorAll('input[type="text"]');
-            textInputs.forEach(input => {
-                if (input.value.trim() === "") {
-                    let label = input.previousElementSibling.innerText;
-                    messages.push("Please fill out the field: " + label);
-                    valid = false;
-                }
-            });
-    
-            // Check dropdowns
-            let dropdowns = document.querySelectorAll('select');
-            dropdowns.forEach(select => {
-                if (select.value === "") {
-                    messages.push("Please select an option for: " + select.previousElementSibling.innerText);
-                    valid = false;
-                }
-            });
-    
-            // Check yes/no button selections (only for questions with yes/no buttons)
-            let yesNoQuestions = document.querySelectorAll('.question:has(.yes-no-button)');
-            yesNoQuestions.forEach(question => {
-                let selected = question.querySelector('.yes-no-button.selected');
-                if (!selected) {
-                    let questionLabel = question.querySelector('label').innerText;
-                    messages.push("Please answer the yes/no question: " + questionLabel);
-                    valid = false;
-                }
-            });
-    
-            // If there are errors, show all in one alert
-            if (!valid) {
-                event.preventDefault(); // Prevent form submission
-                alert(messages.join("\n"));
-            } else {
-                // If valid, allow form submission or redirect
-                event.preventDefault(); // Still prevent submission, and redirect manually
-                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-                emailjs.init('0xTkNhNb-YOtimykg'); // Replace with your EmailJS User ID
-                //RIEAa-XXSAxx6E-Mb
-                emailjs.send("service_j3wxxur", "template_9t6k6ju");
-                window.location.href = 'submitted.html';
-            }
-        }
-    </script>
 </body>
 </html>
