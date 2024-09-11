@@ -112,20 +112,26 @@
         }
         .image-container {
             position: relative;
-            width: 50%;
-            height: 50%;
-            display: inline-block;
+            width: 100%; /* Adjust to take full width of the container */
+            max-width: 800px; /* Optional: Set a max width to constrain size */
+            margin: 0 auto; /* Center the container */
         }
-
+        
+        #uploadedImage {
+            display: block; /* Ensure the uploaded image is displayed */
+            width: 100%; /* Adjust to fill container */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
         .overlay-image {
             position: absolute;
             top: 0;
             left: 0;
-            opacity: 0.35;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Ensure the overlay doesn't block the original image */
-            display: none; /* Hide the overlay initially */
+            width: 100%; /* Ensure overlay covers the uploaded image */
+            height: 100%; /* Ensure overlay covers the uploaded image */
+            opacity: 0.5; /* Adjust opacity for visibility */
+            pointer-events: none; /* Ensure the overlay doesn't block interactions */
+            display: none; /* Hide overlay initially */
         }
         
     </style>
@@ -197,17 +203,17 @@
         const uploadedImage = document.getElementById('uploadedImage');
         const overlayImage = document.getElementById('overlayImage');
         const imageContainer = document.getElementById('imageContainer');
-
+        
         imageUpload.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     uploadedImage.src = e.target.result;
-                    uploadedImage.style.display = 'block';
-
+        
                     // Wait until the image is loaded before displaying the overlay
                     uploadedImage.onload = function() {
+                        // Ensure overlay has the same size as the uploaded image
                         overlayImage.style.display = 'block';
                         imageContainer.style.width = uploadedImage.width + 'px';
                         imageContainer.style.height = uploadedImage.height + 'px';
