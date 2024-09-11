@@ -5,45 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 1</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        html, body {
             margin: 0;
             padding: 0;
+            width: 100%;
         }
+        
         nav {
             background-color: #333;
             padding: 10px 0;
             text-align: center;
+            width: 100%; /* Ensure nav spans full width */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
+        
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            justify-content: center; /* Center the items horizontally */
+            row-gap: 10px; /* Vertical spacing between rows */
         }
+        
         nav ul li {
-            margin: 0 10px;
+            margin: 0 5px; /* Space between items */
         }
+        
         nav ul li a {
             text-decoration: none;
             color: white;
             background-color: #007bff;
-            padding: 10px 20px;
+            padding: 8px 15px; /* Adjust padding for smaller buttons */
             border-radius: 5px;
             display: inline-block;
             font-weight: bold;
+            font-size: 14px; /* Adjust font size for smaller text */
         }
+        
         nav ul li a:hover {
             background-color: #0056b3;
         }
-        h1 {
+        .header-container {
             text-align: center;
-            margin-top: 20px;
+            margin: 20px auto;
+            max-width: 90%; /* Adjust as needed */
         }
-        p {
-            text-align: center;
-            margin: 20px;
+        .header-container h1 {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
+        }
+        .header-container h3 {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
+        }
+        .header-container p {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
+        }
+        .header-container img {
+            max-width: 100%; /* Ensure image fits within container */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+            margin: 0 auto; /* Center image horizontally */
         }
       .image-container {
             position: relative;
@@ -71,12 +99,16 @@
             <li><a href="3.html">Specimen 3</a></li>
             <li><a href="4.html">Specimen 4</a></li>
             <li><a href="5.html">Specimen 5</a></li>
-            <li><a href="map.html">Map</a></li>
-            <li><a href="upload.html">Upload Image</a></li>
         </ul>
     </nav>
-    <h1>Page 1</h1>
-    <p>This is Page 1.</p>
+
+    <div class="header-container">
+        <h1>The Lurker in the Dark #109</h1>
+        <h3>Danger Scale: 4/5</h3>
+        <img src="https://anonymousapparation.github.io/themetropolitanspectre/images/unnamed.png">
+        <p>Many businessmen have noticed strange activity in the parking garage of the Industrial District. Some have reported sightings of a hideous entity which dwells only in dark corners. These witnesses have noticed the ghoul’s intense aversion to any sources of light, preferring the deepest levels of the garage, where few frequent. Historian Jacques Rosencrantz suspects that this creature may be a member of the Rockhold catastrophe victims. In 1878, workers building a system of underground waterworks became stranded below when a cement truck crashed and sealed the entrance. With no light in their new home, it is rumored that they evolved, becoming both blind and monstrous.</p>
+    </div>
+    
     <h1>Upload and Overlay Image</h1>
     <input type="file" id="imageUpload" accept="image/*">
     <div id="imageContainer" class="image-container">
