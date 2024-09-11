@@ -137,7 +137,7 @@
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        emailjs.init('0xTkNhNb-YOtimykg'); // 0xTkNhNb-YOtimykg   //RIEAa-XXSAxx6E-Mb
+        emailjs.init('UtnJKJLyBH8Q4oCxW'); // 0xTkNhNb-YOtimykg
 
         function toggleSelected(button) {
             let buttons = button.parentElement.querySelectorAll('.yes-no-button');
@@ -190,7 +190,7 @@
                 alert(messages.join("\n"));
             } else {
                 // If valid, send the email and redirect
-                emailjs.send("service_j3wxxur", "1").then(function(response) {
+                emailjs.send("boss", "1").then(function(response) {
                     console.log('Sent successfully', response);
                     window.location.href = 'submitted.html';
                 }, function(error) {
