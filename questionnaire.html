@@ -137,7 +137,7 @@
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        emailjs.init('0xTkNhNb-YOtimykg'); // Replace with your EmailJS User ID
+        emailjs.init('RIEAa-XXSAxx6E-Mb'); // 0xTkNhNb-YOtimykg
 
         function toggleSelected(button) {
             let buttons = button.parentElement.querySelectorAll('.yes-no-button');
@@ -198,62 +198,9 @@
                 });
             }
         }
-
-        const imageUpload = document.getElementById('imageUpload');
-        const uploadedImage = document.getElementById('uploadedImage');
-        const overlayImage = document.getElementById('overlayImage');
-        const imageContainer = document.getElementById('imageContainer');
-        
-        imageUpload.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedImage.src = e.target.result;
-        
-                    // Wait until the image is loaded before displaying the overlay
-                    uploadedImage.onload = function() {
-                        // Ensure overlay has the same size as the uploaded image
-                        overlayImage.style.display = 'block';
-                        imageContainer.style.width = uploadedImage.width + 'px';
-                        imageContainer.style.height = uploadedImage.height + 'px';
-                    };
-                };
-                reader.readAsDataURL(file);
-            }
-        });
     </script>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="1.html">Specimen 1</a></li>
-            <li><a href="2.html">Specimen 2</a></li>
-            <li><a href="3.html">Specimen 3</a></li>
-            <li><a href="4.html">Specimen 4</a></li>
-            <li><a href="5.html">Specimen 5</a></li>
-            <li><a href="map.html">Map</a></li>
-            <li><a href="upload.html">Upload Image</a></li>
-        </ul>
-    </nav>
-
-    <div class="header-container">
-        <h1>The Lurker in the Dark #109</h1>
-        <h3>Danger Scale: 4/5</h3>
-        <img src="https://anonymousapparation.github.io/themetropolitanspectre/images/unnamed.png">
-        <p>Many businessmen have noticed strange activity in the parking garage of the Industrial District. Some have reported sightings of a hideous entity which dwells only in dark corners. These witnesses have noticed the ghoul’s intense aversion to any sources of light, preferring the deepest levels of the garage, where few frequent. Historian Jacques Rosencrantz suspects that this creature may be a member of the Rockhold catastrophe victims. In 1878, workers building a system of underground waterworks became stranded below when a cement truck crashed and sealed the entrance. With no light in their new home, it is rumored that they evolved, becoming both blind and monstrous.</p>
-    </div>
-    
-    <h1>Upload and Overlay Image</h1>
-    <input type="file" id="imageUpload" accept="image/*">
-    <div id="imageContainer" class="image-container">
-        <!-- User-uploaded image will be displayed here -->
-        <img id="uploadedImage" alt="Uploaded Image">
-        <!-- Overlay image -->
-        <img id="overlayImage" class="overlay-image" src="https://static.vecteezy.com/system/resources/previews/026/979/903/non_2x/watercolor-realictic-victorian-ghost-vintage-style-illustration-gothic-shadow-clipart-isolated-on-white-background-png.png" alt="Overlay Image">
-    </div>
-    
     <form id="questionnaireForm" onsubmit="validateForm(event)">
     <h1>Questionnaire</h1>
 
