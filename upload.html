@@ -82,10 +82,6 @@
         
         .overlay-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             opacity: 0.5;
             pointer-events: none;
             display: none;
@@ -126,13 +122,6 @@
             <li><a href="upload.html">Upload</a></li>
         </ul>
     </nav>
-
-    <div class="header-container">
-        <h1>The Lurker in the Dark #109</h1>
-        <h3>Danger Scale: 4/5</h3>
-        <img src="https://anonymousapparation.github.io/themetropolitanspectre/images/unnamed.png" alt="Header Image">
-        <p>Many businessmen have noticed strange activity in the parking garage of the Industrial District. Some have reported sightings of a hideous entity which dwells only in dark corners. These witnesses have noticed the ghoul’s intense aversion to any sources of light, preferring the deepest levels of the garage, where few frequent. Historian Jacques Rosencrantz suspects that this creature may be a member of the Rockhold catastrophe victims. In 1878, workers building a system of underground waterworks became stranded below when a cement truck crashed and sealed the entrance. With no light in their new home, it is rumored that they evolved, becoming both blind and monstrous.</p>
-    </div>
     
     <h3>First, upload your picture below for analysis</h3>
     <input type="file" id="imageUpload" accept="image/*">
@@ -143,7 +132,7 @@
         <img id="overlayImage" class="overlay-image" src="https://static.vecteezy.com/system/resources/previews/026/979/903/non_2x/watercolor-realictic-victorian-ghost-vintage-style-illustration-gothic-shadow-clipart-isolated-on-white-background-png.png" alt="Overlay Image">
     </div>
 
-    <h3>Next, submit your final image and complete the straightforward questionnaire</h3>
+    <h3><br><br>Next, submit your final image and complete the straightforward questionnaire</h3>
     <div class="bottom-button-container">
         <button id="navigateButton" onclick="navigateToPage()">Submit Image</button>
     </div>
@@ -162,9 +151,25 @@
                     uploadedImage.src = e.target.result;
                     uploadedImage.style.display = 'block';
 
-                    // Wait until the image is loaded before displaying the overlay
+                    // Wait until the image is loaded before displaying and positioning the overlay
                     uploadedImage.onload = function() {
                         overlayImage.style.display = 'block';
+
+                        // Set overlay size (50% of uploaded image width as an example)
+                        const overlayScale = 0.3; // Adjust for smaller or larger overlay
+                        overlayImage.style.width = uploadedImage.width * overlayScale + 'px';
+                        overlayImage.style.height = 'auto'; // Maintain aspect ratio
+
+                        // Generate random top and left positions for the overlay
+                        const maxLeft = uploadedImage.width - overlayImage.clientWidth;
+                        const maxTop = uploadedImage.height - overlayImage.clientHeight;
+                        const randomLeft = Math.random() * maxLeft;
+                        const randomTop = Math.random() * maxTop;
+
+                        overlayImage.style.left = randomLeft + 'px';
+                        overlayImage.style.top = randomTop + 'px';
+
+                        // Update container dimensions to fit the uploaded image
                         imageContainer.style.width = uploadedImage.width + 'px';
                         imageContainer.style.height = uploadedImage.height + 'px';
                     };
