@@ -154,38 +154,44 @@
         const overlayImage = document.getElementById('overlayImage');
         const imageContainer = document.getElementById('imageContainer');
 
+        let triedUploading = false; // Flag to track if user tried uploading after entering 2
+
         imageUpload.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedImage.src = e.target.result;
-                    uploadedImage.style.display = 'block';
+            const numberInput = document.getElementById('numberInput').value;
 
-                    // Wait until the image is loaded before displaying and positioning the overlay
-                    uploadedImage.onload = function() {
-                        overlayImage.style.display = 'block';
+            if (numberInput === '109' && !triedUploading) {
+                alert('No entity was spotted in your picture.');
+                triedUploading = true; // Set the flag to indicate they have tried uploading
+                imageUpload.value = ''; // Clear the input for the user to try again
+            } else {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                        uploadedImage.style.display = 'block';
 
-                        // Set overlay size (50% of uploaded image width as an example)
-                        const overlayScale = 0.3 + Math.random() * (0.8 - 0.3); // Adjust for smaller or larger overlay
-                        overlayImage.style.width = uploadedImage.width * overlayScale + 'px';
-                        overlayImage.style.height = 'auto'; // Maintain aspect ratio
+                        uploadedImage.onload = function() {
+                            overlayImage.style.display = 'block';
 
-                        // Generate random top and left positions for the overlay
-                        const maxLeft = uploadedImage.width - overlayImage.clientWidth;
-                        const maxTop = uploadedImage.height - overlayImage.clientHeight;
-                        const randomLeft = Math.random() * maxLeft;
-                        const randomTop = Math.random() * maxTop;
+                            const overlayScale = 0.3 + Math.random() * (0.8 - 0.3);
+                            overlayImage.style.width = uploadedImage.width * overlayScale + 'px';
+                            overlayImage.style.height = 'auto';
 
-                        overlayImage.style.left = randomLeft + 'px';
-                        overlayImage.style.top = randomTop + 'px';
+                            const maxLeft = uploadedImage.width - overlayImage.clientWidth;
+                            const maxTop = uploadedImage.height - overlayImage.clientHeight;
+                            const randomLeft = Math.random() * maxLeft;
+                            const randomTop = Math.random() * maxTop;
 
-                        // Update container dimensions to fit the uploaded image
-                        imageContainer.style.width = uploadedImage.width + 'px';
-                        imageContainer.style.height = uploadedImage.height + 'px';
+                            overlayImage.style.left = randomLeft + 'px';
+                            overlayImage.style.top = randomTop + 'px';
+
+                            imageContainer.style.width = uploadedImage.width + 'px';
+                            imageContainer.style.height = uploadedImage.height + 'px';
+                        };
                     };
-                };
-                reader.readAsDataURL(file);
+                    reader.readAsDataURL(file);
+                }
             }
         });
 
@@ -199,14 +205,23 @@
 
             // Set target URL based on the input number
             switch (numberInput) {
-                case '1':
-                    targetUrl = 'questionnaire.html'; // Replace with your actual URL
+                case '109':
+                    targetUrl = 'questionnaire.html'; //boss thanks 1
                     break;
-                case '2':
-                    targetUrl = 'page2.html'; // Replace with your actual URL
+                case '42':
+                    targetUrl = 'questionnaire1.html'; //boss thanks 1, anon threat 1
                     break;
-                case '3':
-                    targetUrl = 'page3.html'; // Replace with your actual URL
+                case '78':
+                    targetUrl = 'questionnaire.html'; //boss thanks 1
+                    break;
+                case '295':
+                    targetUrl = 'questionnaire2.html'; // boss thanks 1, anon threat 2
+                    break;
+                case '22':
+                    targetUrl = 'questionnaire.html'; // boss thanks 1
+                    break;
+                case '999':
+                    targetUrl = 'submitted1.html'; // boss thanks 2
                     break;
                 default:
                     alert('Invalid Entity Number Code');
