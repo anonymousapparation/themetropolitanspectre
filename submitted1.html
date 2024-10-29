@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%; /* Ensure nav spans full width */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            justify-content: center; /* Center the items horizontally */
+            row-gap: 10px; /* Vertical spacing between rows */
+        }
+        
+        nav ul li {
+            margin: 0 5px; /* Space between items */
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 8px 15px; /* Adjust padding for smaller buttons */
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px; /* Adjust font size for smaller text */
+        }
+        
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        p {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="upload.html">Upload</a></li>
+        </ul>
+    </nav>
+    <p>Thank you for submitting a miscellaneous image.<br></p>
+
+    <div style="text-align: center;">
+        <img src="https://www.heatpressnation.com/cdn/shop/products/a10_1_1_888f3dc6-938b-4c2b-adba-777d9af5b336_800x.png?v=1679419829">
+    </div>
+</body>
+</html>
