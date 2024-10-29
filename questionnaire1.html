@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Hire Questionnaire</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%; /* Ensure nav spans full width */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            justify-content: center; /* Center the items horizontally */
+            row-gap: 10px; /* Vertical spacing between rows */
+        }
+        
+        nav ul li {
+            margin: 0 5px; /* Space between items */
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 8px 15px; /* Adjust padding for smaller buttons */
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px; /* Adjust font size for smaller text */
+        }
+        
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+        .header-container {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 90%; /* Adjust as needed */
+        }
+        .header-container h1 {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
+        }
+        .header-container h3 {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
+        }
+        .header-container p {
+            margin: 20px 0; /* Adjust as needed */
+            /* Optional: Add padding if needed */
+            padding: 0 10px;
+        }
+        .header-container img {
+            max-width: 100%; /* Ensure image fits within container */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+            margin: 0 auto; /* Center image horizontally */
+        }
+        p {
+            text-align: center;
+            margin: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .yes-no-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .yes-no-button.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+        .image-container {
+            position: relative;
+            width: 100%; /* Adjust to take full width of the container */
+            max-width: 800px; /* Optional: Set a max width to constrain size */
+            margin: 0 auto; /* Center the container */
+        }
+        
+        #uploadedImage {
+            display: block; /* Ensure the uploaded image is displayed */
+            width: 100%; /* Adjust to fill container */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
+        .overlay-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Ensure overlay covers the uploaded image */
+            height: 100%; /* Ensure overlay covers the uploaded image */
+            opacity: 0.5; /* Adjust opacity for visibility */
+            pointer-events: none; /* Ensure the overlay doesn't block interactions */
+            display: none; /* Hide overlay initially */
+        }
+        
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init('UtnJKJLyBH8Q4oCxW'); // 0xTkNhNb-YOtimykg
+
+        function toggleSelected(button) {
+            let buttons = button.parentElement.querySelectorAll('.yes-no-button');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+        }
+
+        function toggleSelected2(button) {
+            alert("Unexpected action taken. Please answer the simple questionnaire properly");
+        }
+
+        function validateForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            let valid = true;
+            let messages = [];
+
+            // Check all text inputs
+            let textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    let label = input.previousElementSibling.innerText;
+                    messages.push("Please fill out the field: " + label);
+                    valid = false;
+                }
+            });
+
+            // Check dropdowns
+            let dropdowns = document.querySelectorAll('select');
+            dropdowns.forEach(select => {
+                if (select.value === "") {
+                    messages.push("Please select an option for: " + select.previousElementSibling.innerText);
+                    valid = false;
+                }
+            });
+
+            // Check yes/no button selections (only for questions with yes/no buttons)
+            let yesNoQuestions = document.querySelectorAll('.question');
+            yesNoQuestions.forEach(question => {
+                let selected = question.querySelector('.yes-no-button.selected');
+                if (question.querySelector('.yes-no-button') && !selected) {
+                    let questionLabel = question.querySelector('label').innerText;
+                    messages.push("Please answer the yes/no question: " + questionLabel);
+                    valid = false;
+                }
+            });
+
+            // If there are errors, show all in one alert
+            if (!valid) {
+                alert(messages.join("\n"));
+            } else {
+                // If valid, send the email and redirect
+                emailjs.send("boss", "1").then(function(response) {
+                    console.log('Sent successfully', response);
+                    window.location.href = 'submitted.html';
+                }, function(error) {
+                    console.error('Failed to send', error);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <form id="questionnaireForm" onsubmit="validateForm(event)">
+    <h1>Questionnaire</h1>
+
+    <!-- Section 1: Text Boxes -->
+    <div class="section">
+        <h2>SECTION 1 - PERSONAL INFORMATION</h2>
+        <div class="question">
+            <label for="question1-1">Bureau I.D.</label>
+            <input type="text" id="question1-1" name="question1-1" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question3-1">Preferred Pronouns</label>
+            <select id="question3-1" name="question3-1">
+                <option value="">Select an option</option>
+                <option value="spring">co/co/coself</option>
+                <option value="spring">nba player</option>
+                <option value="summer">ey/em/emself</option>
+                <option value="spring">the/mf/beast</option>
+                <option value="autumn">he/him/himself</option>
+                <option value="winter">it/it/itself</option>
+                <option value="winter">tyrion/lannister</option>
+                <option value="winter">they/them/themself</option>
+                <option value="winter">xie/hir("here")/hirself</option>
+                <option value="spring">f*@$</option>
+                <option value="winter">ze/zir/zirself</option>
+                <option value="winter">ve/vis/virself</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="question1-3">Case Supervisor</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question1-3">Device</label>
+            <input type="text" id="question1-3" name="question1-3" value="Moto G Play">
+        </div>
+        <div class="question">
+            <label for="question1-3">Mailing Address</label>
+            <input type="text" id="question1-3" name="question1-3" value="18 Drowsy Hollow Rd.">
+        </div>
+        <div class="question">
+            <label for="question1-3">Entity Number Code</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+    </div>
+
+    <!-- Section 2: Yes/No Buttons -->
+    <div class="section">
+        <h2>SECTION 2 - HEALTH INFORMATION</h2>
+        <div class="question">
+            <label>Have you noticed anybody following you in the last 3 days?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Have you ever tracked an unknown substance from a dark room?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Have you consumed SKYRIZI® in the last 24 hours?</label>
+            <a href="https://www.skyrizi.com/" target="_blank">More Information</a>
+            <label></label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Have you consumed SERESTOS® in the last 24 hours?</label>
+            <a href="https://www.serestostores.com/" target="_blank">More Information</a>
+            <label></label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Have you noticed any bite marks on your neck in the last 19 days?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Have you recently come into contact with anyone who is buff?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+    </div>
+
+    <!-- Section 3: Dropdowns -->
+    <div class="section">
+        <h2>SECTION 3 - VITALS</h2>
+        <div class="question">
+            <label for="question1-3">Height</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question1-3">Width</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question1-3">Forearm to wrist ratio (cm.)</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question1-3">Overbite (cm.)</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+        <div class="question">
+            <label for="question3-3">Build</label>
+            <select id="question3-3" name="question3-3">
+                <option value="">Select an option</option>
+                <option value="action">1. Pipsqueak</option>
+                <option value="comedy">2. Somewhat</option>
+                <option value="drama">3. Generous</option>
+                <option value="sci-fi">4. Tugboat</option>
+            </select>
+        </div>
+        <div class="question">
+            <label>Have you gone poopoo today?</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label for="question1-3">Clamp (cm.)</label>
+            <input type="text" id="question1-3" name="question1-3" placeholder="Type your answer here...">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>SECTION 4 - FINAL RELEASE</h2>
+        <div class="question">
+            <label>Yes, I want to receive push notifications</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="question">
+            <label>Yes, I want to receive hourly Zoom meeting invites</label>
+            <button type="button" id="yes-button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" id="no-button" class="yes-no-button disabled" onclick="toggleSelected2(this)">No</button>
+        </div>
+        <div class="question">
+            <label>I certify that I have carefully read all of the above information and that my answers are truthful</label>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">Yes</button>
+            <button type="button" class="yes-no-button" onclick="toggleSelected(this)">No</button>
+        </div>
+        <div class="section">
+            <input type="submit" value="Submit">
+        </div>
+    </div>
+    </form>
+</body>
+</html>
