@@ -137,6 +137,8 @@
         <button id="navigateButton" onclick="navigateToPage()">Submit Image</button>
     </div>
 
+    <h3><br></h3>
+
     <script>
         const imageUpload = document.getElementById('imageUpload');
         const uploadedImage = document.getElementById('uploadedImage');
@@ -156,7 +158,7 @@
                         overlayImage.style.display = 'block';
 
                         // Set overlay size (50% of uploaded image width as an example)
-                        const overlayScale = 0.3; // Adjust for smaller or larger overlay
+                        const overlayScale = 0.3 + Math.random() * (0.8 - 0.3); // Adjust for smaller or larger overlay
                         overlayImage.style.width = uploadedImage.width * overlayScale + 'px';
                         overlayImage.style.height = 'auto'; // Maintain aspect ratio
 
