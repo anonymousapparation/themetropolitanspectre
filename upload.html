@@ -112,6 +112,13 @@
             background-color: #0056b3;
         }
 
+        #numberInput {
+            padding: 10px;
+            font-size: 16px;
+            width: 50%;
+            margin: 20px 0;
+        }
+
     </style>
 </head>
 <body>
@@ -123,7 +130,9 @@
         </ul>
     </nav>
     
-    <h3>First, upload your picture below for analysis</h3>
+    <h3>First, enter the entity number code and upload your picture below for analysis</h3>
+    <input type="number" id="numberInput" placeholder="Enter entity number code..." min="1" max="3">
+    <h3><br></h3>
     <input type="file" id="imageUpload" accept="image/*">
     <div id="imageContainer" class="image-container">
         <!-- User-uploaded image will be displayed here -->
