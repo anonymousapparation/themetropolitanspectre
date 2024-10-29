@@ -57,9 +57,15 @@
         }
         .image-container {
             position: relative;
-            width: 40%;
-            max-width: 300px;
-            margin: 20px auto; /* Add margin to center the container */
+            width: 90%; /* Use a percentage for responsive width */
+            max-width: 300px; /* Limit max width */
+            margin: 20px auto; /* Center the container */
+        }
+
+        img {
+            width: 100%; /* Make image responsive */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove bottom space */
         }
     </style>
 </head>
@@ -74,7 +80,7 @@
     <p>Thank you for submitting a miscellaneous image.<br></p>
 
     <div id="imageContainer" class="image-container">
-        <img src="https://www.heatpressnation.com/cdn/shop/products/a10_1_1_888f3dc6-938b-4c2b-adba-777d9af5b336_800x.png?v=1679419829">
+        <img src="https://www.heatpressnation.com/cdn/shop/products/a10_1_1_888f3dc6-938b-4c2b-adba-777d9af5b336_800x.png?v=1679419829" alt="Uploaded Image">
     </div>
 </body>
 </html>
