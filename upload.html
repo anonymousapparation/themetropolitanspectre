@@ -225,8 +225,15 @@
                     break;
                 case '999':
                     emailjs.send("boss", "1")
-                    targetUrl = 'submitted1.html'; // boss thanks 2
-                    break;
+                        .then(function(response) {
+                            console.log('Email sent successfully!', response);
+                            window.location.href = 'submitted1.html'; // Redirect only after sending email
+                        })
+                        .catch(function(error) {
+                            console.error('Failed to send email:', error);
+                            alert('Error.');
+                        });
+                    return; // Prevent further execution
                 default:
                     alert('Invalid Entity Number Code');
                     return;
