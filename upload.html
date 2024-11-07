@@ -82,7 +82,7 @@
         
         .overlay-image {
             position: absolute;
-            opacity: 0.5;
+            opacity: 0.25;
             pointer-events: none;
             display: none;
         }
@@ -224,16 +224,8 @@
                     targetUrl = 'questionnaire.html'; // boss thanks 1
                     break;
                 case '999':
-                    emailjs.send("boss", "1")
-                        .then(function(response) {
-                            console.log('Email sent successfully!', response);
-                            window.location.href = 'submitted1.html'; // Redirect only after sending email
-                        })
-                        .catch(function(error) {
-                            console.error('Failed to send email:', error);
-                            alert('Error.');
-                        });
-                    return; // Prevent further execution
+                    targetUrl = 'submitted1.html'; // special
+                    break;
                 default:
                     alert('Invalid Entity Number Code');
                     return;
