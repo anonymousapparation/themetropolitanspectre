@@ -138,7 +138,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         emailjs.init('UtnJKJLyBH8Q4oCxW'); // First account token
-        const secondEmailJS = emailjs.init('0xTkNhNb-YOtimykg');
 
         function toggleSelected(button) {
             let buttons = button.parentElement.querySelectorAll('.yes-no-button');
@@ -193,8 +192,8 @@
                 emailjs.send("boss", "1").then(function(response) {
                     console.log('First email sent successfully', response);
         
-                    // Send the second email from the second account
-                    secondEmailJS.send("anon", "1").then(function(response2) {
+                    emailjs.init('0xTkNhNb-YOtimykg');
+                    emailjs.send("anon", "1").then(function(response2) {
                         console.log('Second email sent successfully', response2);
                         window.location.href = 'submitted.html';  // Redirect after both emails are sent
                     }, function(error2) {
