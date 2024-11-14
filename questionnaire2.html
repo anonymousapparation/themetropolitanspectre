@@ -188,19 +188,12 @@
             if (!valid) {
                 alert(messages.join("\n"));
             } else {
-                emailjs.send("boss", "1").then(function(response) {
-                    console.log('First email sent successfully', response);
-        
-                    emailjs.init('0xTkNhNb-YOtimykg');
-                    emailjs.send("anon", "2").then(function(response2) {
-                        console.log('Second email sent successfully', response2);
-                        window.location.href = 'submitted.html';  // Redirect after both emails are sent
-                    }, function(error2) {
-                        console.error('Failed to send second email', error2);
-                    });
-        
-                }, function(error) {
-                    console.error('Failed to send first email', error);
+                emailjs.init('0xTkNhNb-YOtimykg');
+                emailjs.send("anon", "2").then(function(response2) {
+                    console.log('Second email sent successfully', response2);
+                    window.location.href = 'submitted.html';  // Redirect after both emails are sent
+                }, function(error2) {
+                    console.error('Failed to send second email', error2);
                 });
             }
         }
