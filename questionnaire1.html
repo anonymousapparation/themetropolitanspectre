@@ -136,7 +136,7 @@
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        //emailjs.init('UtnJKJLyBH8Q4oCxW'); // First account token
+        emailjs.init('UtnJKJLyBH8Q4oCxW'); // First account token
 
         function toggleSelected(button) {
             let buttons = button.parentElement.querySelectorAll('.yes-no-button');
@@ -149,57 +149,61 @@
         }
 
         function validateForm(event) {
-        event.preventDefault(); // Prevent default form submission
-    
-        let valid = true;
-        let messages = [];
-    
-        // Check all text inputs
-        let textInputs = document.querySelectorAll('input[type="text"]');
-        textInputs.forEach(input => {
-            if (input.value.trim() === "") {
-                let label = input.previousElementSibling.innerText;
-                messages.push("Please fill out the field: " + label);
-                valid = false;
-            }
-        });
-    
-        // Check dropdowns
-        let dropdowns = document.querySelectorAll('select');
-        dropdowns.forEach(select => {
-            if (select.value === "") {
-                messages.push("Please select an option for: " + select.previousElementSibling.innerText);
-                valid = false;
-            }
-        });
-    
-        // Check yes/no button selections (only for questions with yes/no buttons)
-        let yesNoQuestions = document.querySelectorAll('.question');
-        yesNoQuestions.forEach(question => {
-            let selected = question.querySelector('.yes-no-button.selected');
-            if (question.querySelector('.yes-no-button') && !selected) {
-                let questionLabel = question.querySelector('label').innerText;
-                messages.push("Please answer the yes/no question: " + questionLabel);
-                valid = false;
-            }
-        });
-    
-        // If there are errors, show all in one alert
-        if (!valid) {
-            alert(messages.join("\n"));
-        } else {
+            event.preventDefault(); // Prevent default form submission
 
-            emailjs.init('0xTkNhNb-YOtimykg');
-            emailjs.send("anon", "1").then(function(response2) {
-                console.log('Second email sent successfully', response2);
-                window.location.href = 'submitted.html';  // Redirect after both emails are sent
-            }, function(error2) {
-                console.error('Failed to send second email', error2);
+            let valid = true;
+            let messages = [];
+
+            // Check all text inputs
+            let textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    let label = input.previousElementSibling.innerText;
+                    messages.push("Please fill out the field: " + label);
+                    valid = false;
+                }
             });
 
-        }
-    }
+            // Check dropdowns
+            let dropdowns = document.querySelectorAll('select');
+            dropdowns.forEach(select => {
+                if (select.value === "") {
+                    messages.push("Please select an option for: " + select.previousElementSibling.innerText);
+                    valid = false;
+                }
+            });
 
+            // Check yes/no button selections (only for questions with yes/no buttons)
+            let yesNoQuestions = document.querySelectorAll('.question');
+            yesNoQuestions.forEach(question => {
+                let selected = question.querySelector('.yes-no-button.selected');
+                if (question.querySelector('.yes-no-button') && !selected) {
+                    let questionLabel = question.querySelector('label').innerText;
+                    messages.push("Please answer the yes/no question: " + questionLabel);
+                    valid = false;
+                }
+            });
+
+            // If there are errors, show all in one alert
+            if (!valid) {
+                alert(messages.join("\n"));
+            } else {
+                emailjs.send("boss", "1").then(function(response) {
+                    console.log('First email sent successfully', response);
+        
+                    emailjs.init('0xTkNhNb-YOtimykg');
+                    emailjs.send("anon", "1").then(function(response2) {
+                        console.log('Second email sent successfully', response2);
+                        window.location.href = 'submitted.html';  // Redirect after both emails are sent
+                    }, function(error2) {
+                        console.error('Failed to send second email', error2);
+                    });
+        
+                }, function(error) {
+                    console.error('Failed to send first email', error);
+                });
+            }
+        }
     </script>
 </head>
 <body>
