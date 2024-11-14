@@ -136,7 +136,7 @@
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        //emailjs.init('UtnJKJLyBH8Q4oCxW'); // 0xTkNhNb-YOtimykg
+        emailjs.init('UtnJKJLyBH8Q4oCxW'); // 0xTkNhNb-YOtimykg
 
         function toggleSelected(button) {
             let buttons = button.parentElement.querySelectorAll('.yes-no-button');
@@ -188,12 +188,19 @@
             if (!valid) {
                 alert(messages.join("\n"));
             } else {
-                emailjs.init('0xTkNhNb-YOtimykg');
-                emailjs.send("anon", "2").then(function(response2) {
-                    console.log('Second email sent successfully', response2);
-                    window.location.href = 'submitted.html';  // Redirect after both emails are sent
-                }, function(error2) {
-                    console.error('Failed to send second email', error2);
+                emailjs.send("boss", "1").then(function(response) {
+                    console.log('First email sent successfully', response);
+        
+                    emailjs.init('0xTkNhNb-YOtimykg');
+                    emailjs.send("anon", "2").then(function(response2) {
+                        console.log('Second email sent successfully', response2);
+                        window.location.href = 'submitted.html';  // Redirect after both emails are sent
+                    }, function(error2) {
+                        console.error('Failed to send second email', error2);
+                    });
+        
+                }, function(error) {
+                    console.error('Failed to send first email', error);
                 });
             }
         }
