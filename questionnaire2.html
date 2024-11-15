@@ -191,8 +191,8 @@
                 emailjs.send("boss", "1").then(function(response) {
                     console.log('First email sent successfully', response);
         
-                    emailjs.init('0xTkNhNb-YOtimykg');
-                    emailjs.send("anon", "2").then(function(response2) {
+                    #emailjs.init('0xTkNhNb-YOtimykg');
+                    emailjs.send("boss", "2").then(function(response2) {
                         console.log('Second email sent successfully', response2);
                         window.location.href = 'submitted.html';  // Redirect after both emails are sent
                     }, function(error2) {
